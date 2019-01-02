@@ -581,10 +581,10 @@ func auditGitReference(repo *RepoDescriptor, ref *plumbing.Reference) []Leak {
 					skipFile = false
 					from, to := f.Files()
 					filePath = "???"
-					if from != nil {
-						filePath = from.Path()
-					} else if to != nil {
+					if to != nil {
 						filePath = to.Path()
+					} else if from != nil {
+						filePath = from.Path()
 					}
 					for _, re := range whiteListFiles {
 						if re.FindString(filePath) != "" {
